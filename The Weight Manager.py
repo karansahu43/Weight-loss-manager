@@ -13,7 +13,7 @@ import os
 # Declare global constants
 
 def main():
-
+    #take care of workout routine
 
     # Declare variables-------------------------------------------------------------------------------------------------
     name = ''
