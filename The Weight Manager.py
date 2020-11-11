@@ -9,6 +9,11 @@
 
 # list libraries used
 import os
+from macroNutrientscalculator import macroNutrientscalculator
+from timeTakencalculator import timeTakencalculator
+from calPerDaycalculculator import calPerDaycalculculator
+from TDEEcalculator import TDEEcalculator
+from BMIcalculator import BMIcalculator
 
 # Declare global constants
 
@@ -317,7 +322,7 @@ def main():
     #Instructions
 
     print("Please Open your personal file (", name + "'s" ," Personal Profile) to see your results.")
-    GotIt = input("Enter anything to create file: ")
+    GotIt = input("Enter anything to create file(File will be in same folder as code): ")
 
 
     #Make personal Profile file--------------------------------------------------------------------------------------------------------
@@ -448,228 +453,13 @@ def main():
 
     outfile.close()
 
-    os.startfile(name + "'s Personal Profile")
+    #os.startfile(name + "'s Personal Profile")  #Issue running on different systems.
     
 
-    #createResult()
+    
 
 # End main Function------------------------------------------------------------------------------------------------------------------------
 
-# Function BMI calculator
-# Description:
-#	takes inputs and calculates then returns BMI Value
-# Calls:
-#	none
-# Parameters:
-#	height
-#       weight
-# Returns:
-#	BMI
-
-def BMIcalculator(height , weight, goalWeight):
-
-    # Declare local variables
-    BMI = 0
-    NewBMI = 0
-
-    #calculate BMI
-    BMI = ((weight / 2.2)/(height / 100)**2)
-    NewBMI = ((goalWeight / 2.2)/(height / 100)**2)
-
-    #Round numbers
-    BMI = round(BMI, 1)
-    NewBMI = round(NewBMI, 1)
-
-    # Return values
-    return (BMI, NewBMI)
-
-# End Function----------------------------------------------------------------------------------------------------------------
-
-# Function TDEE calculator
-# Description:
-#	calculates and returns TDEE and BMR
-# Calls:
-#	none
-# Parameters:
-#	height
-#       weight
-#       gender
-#       age
-#       activityLevel
-# Returns:
-#	TDEE
-#       BMR
-
-def TDEEcalculator(height, weight, gender, age, activityLevel):
-
-    # Declare local variables
-    TDEE = 0
-    BMR = 0
-
-    #Check gender
-    if (gender == 1):
-        BMR = (66 + (13.7 * (weight / 2.2)) + (5 * height) - (6.8 * age))
-    elif (gender == 2):
-        BMR = (655 + (9.6 * (weight / 2.2)) + (1.8 * height) - (4.7 * age))
-    else:
-        print("somthing went wrong")
-    #End if
-
-    #check activity level
-    if (activityLevel == 1):
-        TDEE = (BMR * 1.2)
-    elif (activityLevel == 2):
-        TDEE = (BMR * 1.375)
-    elif (activityLevel == 3):
-        TDEE = (BMR * 1.55)
-    elif (activityLevel == 4):
-        TDEE = (BMR * 1.725)
-    elif (activityLevel == 5):
-        TDEE = (BMR * 1.9)
-    else:
-        print("somthing went wrong")
-    #End if
-
-    #Round Numbers
-    BMR = round(BMR)
-    TDEE = round(TDEE)
-
-    # Return values
-    return (BMR, TDEE)
-
-# End Function---------------------------------------------------------------------------------------------------------------------
-
-# Function Calories per day calculation
-# Description:
-#	calculates how many calories needed per day for goal
-# Calls:
-#	none
-# Parameters:
-#	TDEE
-#       goalSpeed
-# Returns:
-#	calPerDay
-
-def calPerDaycalculculator (TDEE, goalSpeed):
-
-    # Declare local variables
-    calPerDay = 0
-
-    #calculate cal per day
-
-    if (goalSpeed == 1):
-        calPerDay = (TDEE - 250)
-    elif (goalSpeed == 2):
-        calPerDay = (TDEE - 500)
-    elif (goalSpeed == 3):
-        calPerDay = (TDEE + 250)
-    elif (goalSpeed == 4):
-        calPerDay = (TDEE + 500)
-    elif (goalSpeed == 5):
-        calPerDay = TDEE
-    else:
-        print("somthing went wrong")
-    #End If
-
-    #Round Numbers
-    calPerDay = round(calPerDay)
-
-    # Return values
-    return calPerDay
-
-# End Function---------------------------------------------------------------------------------------------------------------------
-
-
-# Function timeTaken Calculation
-# Description:
-#	Calculates the approximate amount of time to reach your goal
-# Calls:
-#	none
-# Parameters:
-#	goalWeight
-#       goalSpeed
-#       weight
-# Returns:
-#	timeTaken
-
-def timeTakencalculator (goalWeight , goalSpeed, weight):
-
-    # Declare local variables
-    timeTaken = 0
-    weightDifference = 0
-    
-    #find Weight difference
-    if (weight > goalWeight):
-        weightDifference = (weight - goalWeight)
-    elif (weight < goalWeight):
-        weightDifference = (goalWeight - weight)
-    elif (weight == goalWeight):
-        weightDifference = 0
-    else:
-        print("somthing went wrong")
-    #End if
-
-    #calculate timeTaken
-    if (goalSpeed == 1) or (goalSpeed == 3):
-        timeTaken = ((weightDifference * 3500)/ 250)
-    elif (goalSpeed == 2) or (goalSpeed == 4):
-        timeTaken = ((weightDifference * 3500)/ 500)
-    elif (weightDifference == 0):
-        timeTaken = 0
-    else:
-        print("somthing went wrong")
-    #End if 
-    
-    # Return values
-    return timeTaken
-
-# End Function-----------------------------------------------------------------------------------------------------------------------
-
-
-# Function Macroprofile calculator
-# Description:
-#	calculate how many grams of each macronutrient you need based on your preference
-# Calls:
-#	none
-# Parameters:
-#	macroNutrients
-#       carbohydrate
-#       fat
-#       protein
-#       calPerDay
-# Returns:
-#	carbohydrateGrams
-#       fatGrams
-#       proteinGrams
-
-def macroNutrientscalculator (macroNutrients, carbohydrate, fat, protein, calPerDay):
-
-    # Declare local variables
-    carbohydrateGrams = 0
-    fatGrams = 0
-    proteinGrams = 0
-
-    #calculate macronutrint profile
-    if (macroNutrients == 1):
-        pass
-    else:
-        carbohydrateGrams = ((calPerDay * (carbohydrate / 100)) / 4)
-        fatGrams = ((calPerDay * (fat / 100)) / 9)
-        proteinGrams = ((calPerDay * (protein / 100)) / 4)
-    #End if
-
-    #Round Numbers
-    carbohydrateGrams = round(carbohydrateGrams)
-    fatGrams = round(fatGrams)
-    proteinGrams = round(proteinGrams)
-
-    # Return values
-    return (carbohydrateGrams, fatGrams, proteinGrams)
-
-# End Function----------------------------------------------------------------------------------------------------------------------
-
-
-
-    
+##Calling main function#########
 
 main()
