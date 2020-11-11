@@ -7,3 +7,5 @@ Runs on command prompt.
  Outputs a text file with caloric needs, macronutrient breakdown, estimated weightloss
 time, BMI, basal metabolic rate, and more.
 
+Please Run the main function in: The Weight Manager.py
+
