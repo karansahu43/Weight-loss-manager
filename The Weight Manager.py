@@ -9,6 +9,7 @@
 
 # list libraries used
 import os
+import subprocess
 from macroNutrientscalculator import macroNutrientscalculator
 from timeTakencalculator import timeTakencalculator
 from calPerDaycalculculator import calPerDaycalculculator
@@ -453,8 +454,7 @@ def main():
 
     outfile.close()
 
-    #os.startfile(name + "'s Personal Profile")  #Issue running on different systems.
-    
+    os.system("notepad.exe " + name + "'s Personal Profile")
 
     
 
