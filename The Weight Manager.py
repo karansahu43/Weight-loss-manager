@@ -10,6 +10,8 @@
 # list libraries used
 import os
 import subprocess
+
+#Other python files for program
 from macroNutrientscalculator import macroNutrientscalculator
 from timeTakencalculator import timeTakencalculator
 from calPerDaycalculculator import calPerDaycalculculator
@@ -259,7 +261,7 @@ def main():
     print()
 
     if (macroNutrients == 1):
-        pass                                                                    ## <<<<---- NEED TO CHANGE EVENTUALLY
+        pass                                                                    
 
     elif (macroNutrients == 2):
         carbohydrate = 60
